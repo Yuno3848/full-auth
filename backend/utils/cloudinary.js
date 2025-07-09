@@ -8,7 +8,7 @@ cloudinary.config({
 
 export const uploadOnCloudinary = async (localFilePath) => {
   try {
-    const uploadResult = await v2.uploader.upload(localFilePath, {
+    const uploadResult = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "image",
     });
     return uploadResult;

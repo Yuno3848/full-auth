@@ -15,6 +15,15 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup(inputs);
+    setInputs({
+      username: "",
+      fullname: "",
+      email: "",
+      password: "",
+      avatar: null,
+    });
+
+    console.log(inputs);
   };
   return (
     <div className="bg-[#1e1e1e] w-[100vw] h-[100vh] flex items-center justify-center px-4">
@@ -103,8 +112,8 @@ const SignUp = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) =>
-                setInputs({ ...inputs, avatar: e.target.files[0] })
+              onChange={
+                (e) => setInputs({ ...inputs, avatar: e.target.files[0] }) //files[0]
               }
               className="bg-[#2a1d1d] text-white file:bg-[#C1A57B] file:text-[#1e1e1e] file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer px-4 py-2 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
