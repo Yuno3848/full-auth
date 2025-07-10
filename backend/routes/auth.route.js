@@ -15,6 +15,6 @@ auth.post("/registeredUser", upload.single("avatar"), registeredUser);
 auth.patch("/verify-email/:token", verifyEmail);
 auth.post("/login", loginUser);
 auth.get("/logout", isLogged, logoutUser);
-auth.get("/forgot-password", forgotPassword);
+auth.post("/forgot-password", forgotPassword);
 auth.patch("/reset-password/:token", resetPassword);
 export default auth;

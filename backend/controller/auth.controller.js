@@ -205,15 +205,19 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
 export const resetPassword = asyncHandler(async (req, res) => {
   const { token } = req.params;
-  const { password } = req.body;
+  const { password,confirmPassword } = req.body;
   if (!token) {
     throw new ApiError(400, "Invalid Token...");
   }
 
+  if(password !== confirmPassword){
+    throw new ApiError(400, "Passwords do not match.");
+  }
   const forgotPasswordToken = crypto
     .createHash("sha256")
     .update(token)
     .digest("hex");
+
 
   const user = await User.findOneAndUpdate(
     {
