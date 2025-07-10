@@ -186,7 +186,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     subject: "forgot password link",
     mailGenContent: forgotPasswordMail(
       user.username,
-      `http://localhost:8000/api/v1/user/resetpassword/${unhashedToken}`
+      `http://localhost:5173/api/v1/user/resetpassword/${unhashedToken}`
     ),
   });
 
@@ -205,19 +205,21 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
 export const resetPassword = asyncHandler(async (req, res) => {
   const { token } = req.params;
-  const { password,confirmPassword } = req.body;
+  const { password, confirmPassword } = req.body;
   if (!token) {
     throw new ApiError(400, "Invalid Token...");
   }
+  if (!password || !confirmPassword) {
+    throw new ApiError(400, "Both password fields are required.");
+  }
 
-  if(password !== confirmPassword){
+  if (password !== confirmPassword) {
     throw new ApiError(400, "Passwords do not match.");
   }
   const forgotPasswordToken = crypto
     .createHash("sha256")
     .update(token)
     .digest("hex");
-
 
   const user = await User.findOneAndUpdate(
     {
