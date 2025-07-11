@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import useSign from "../../hooks/useSignup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { loading, signup } = useSign();
@@ -12,7 +12,7 @@ const SignUp = () => {
     password: "",
     avatar: null,
   });
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup(inputs);
@@ -25,6 +25,7 @@ const SignUp = () => {
     });
 
     console.log(inputs);
+    navigate("/signin");
   };
   return (
     <div className="bg-[#1e1e1e] w-[100vw] h-[100vh] flex items-center justify-center px-4">

@@ -1,11 +1,12 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import ResetPassword from "./pages/resetPassword/resetPassword";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import { Toaster } from "react-hot-toast";
-import { useAuthContext } from "./contexts/authContext";
 import Welcome from "./pages/Welcome/Welcome";
+import { useAuthContext } from "./contexts/authContext";
+import Intro from "./pages/Intro/Intro";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -13,24 +14,12 @@ function App() {
     <>
       <Toaster />
       <Routes>
-        <Route
-          path="/signup"
-          element={authUser ? <SignUp /> : <Navigate to={<SignIn />} />}
-        />
-        <Route
-          path="/signin"
-          element={authUser ? <SignIn /> : <Navigate to={<Welcome />} />}
-        />
-        <Route
-          path="/forgot-password"
-          element={
-            authUser ? <ForgotPassword /> : <Navigate to={<Welcome />} />
-          }
-        />
-        <Route
-          path="/reset-password/:token"
-          element={authUser ? <resetPassword /> : <Navigate to={<Welcome />} />}
-        />
+        <Route index element={<Intro />} />
+        <Route path="/signup" element={!authUser ? <SignUp /> : <Welcome />} />
+        <Route path="/signin" element={!authUser ? <SignIn /> : <Welcome />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/welcome" element={authUser ? <Welcome /> : <SignIn />} />
       </Routes>
     </>
   );

@@ -36,10 +36,10 @@ const useSign = () => {
         toast.error(data.message || "Something went wrong");
         return;
       }
-      localStorage.setItem("user-info", JSON.stringify(data));
-      setAuthUser(data);
+      setAuthUser(data.data);
       toast.success("Signup successful!");
     } catch (error) {
+      console.log("sign up error", error.message);
       toast.error("Network error. Please try again.");
     } finally {
       setLoading(false);

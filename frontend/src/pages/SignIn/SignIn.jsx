@@ -1,20 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import useSignIn from "../../hooks/useSignin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SignIn = () => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const { loading, signin } = useSignIn();
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signin(inputs);
+    const success = await signin(inputs);
     setInputs({
       email: "",
       password: "",
     });
+    if (success) navigate("/welcome");
   };
   return (
     <div className="bg-[#1e1e1e] w-[100vw] h-[100vh] flex items-center justify-center px-4">

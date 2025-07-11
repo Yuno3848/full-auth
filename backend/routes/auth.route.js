@@ -2,6 +2,7 @@ import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
 import {
   forgotPassword,
+  getCurrentUser,
   loginUser,
   logoutUser,
   registeredUser,
@@ -17,4 +18,5 @@ auth.post("/login", loginUser);
 auth.get("/logout", isLogged, logoutUser);
 auth.post("/forgot-password", forgotPassword);
 auth.patch("/reset-password/:token", resetPassword);
+auth.get("/profile", isLogged, getCurrentUser);
 export default auth;

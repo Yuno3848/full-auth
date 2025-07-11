@@ -128,13 +128,13 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   const accessCookieOptions = {
     httpOnly: true,
-
+    secure: false,
     maxAge: 24 * 60 * 60 * 1000,
   };
 
   const refreshCookieOptions = {
     httpOnly: true,
-
+    secure: false,
     maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
   };
 
@@ -248,4 +248,19 @@ export const resetPassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, "password reset successfully...", user));
+});
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  const userId = req.userId;
+
+  if (!userId) {
+    throw new ApiError(400, "User not found");
+  }
+
+  const user = await User.findById(userId).select("-password -refreshToken");
+
+  if (!user) {
+    throw new ApiError(400, "User Data not found");
+  }
+
+  res.status(200).json(new ApiResponse(200, user, "User Found Successfully"));
 });
