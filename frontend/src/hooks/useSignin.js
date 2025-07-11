@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../contexts/authContext";
 const useSignIn = () => {
   const [loading, setLoading] = useState(false);
-
+  const { setAuthUser } = useAuthContext();
   const signin = async ({ email, password }) => {
     setLoading(true);
     const errorResult = handleErrors(email, password);
@@ -26,6 +27,8 @@ const useSignIn = () => {
         toast.error(data.message || "Something went wrong");
         return;
       }
+      localStorage.setItem("user-info", JSON.stringify(data));
+      setAuthUser(data);
       toast.success("Sign In successful!");
     } catch (error) {
       toast.error("Bad Credentials.");

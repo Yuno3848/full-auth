@@ -13,7 +13,8 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await resetPassword(inputs);
+    const data = await resetPassword(inputs);
+    console.log("data :", data);
   };
 
   return (

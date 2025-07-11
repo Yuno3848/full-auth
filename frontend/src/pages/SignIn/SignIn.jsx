@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import useSignIn from "../../hooks/useSignin";
+import { Link } from "react-router-dom";
 const SignIn = () => {
   const [inputs, setInputs] = useState({
     email: "",
@@ -68,11 +69,17 @@ const SignIn = () => {
               className="bg-[#2a1d1d] text-white px-4 py-3 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
           </div>
-
+          <Link
+            className="  text-sm text-[#C1A57B] hover:text-[#e2c89e] underline
+          hover:underline-offset-2 transition-all duration-200"
+            to="/signup"
+          >
+            Don't have an account?
+          </Link>
           <button
             type="submit"
-            className="mt-4 bg-[#C1A57B] text-[#1e1e1e] font-semibold py-3 rounded-xl hover:bg-[#e2c89e] transition-all duration-300 hover:cursor-pointer"
-            disabled = {loading}
+            className="mt-2 bg-[#C1A57B] text-[#1e1e1e] font-semibold py-3 rounded-xl hover:bg-[#e2c89e] transition-all duration-300 hover:cursor-pointer"
+            disabled={loading}
           >
             {loading ? <span>Sign In....</span> : <span>Sign In</span>}
           </button>

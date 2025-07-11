@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await forgotPassword({ email });
+    
   };
   return (
     <div className="bg-[#1e1e1e] w-[100vw] h-[100vh] flex items-center justify-center px-4">

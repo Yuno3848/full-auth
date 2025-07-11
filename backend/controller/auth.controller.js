@@ -186,7 +186,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     subject: "forgot password link",
     mailGenContent: forgotPasswordMail(
       user.username,
-      `http://localhost:5173/api/v1/user/resetpassword/${unhashedToken}`
+      `http://localhost:5173/api/v1/user/reset-password/${unhashedToken}`
     ),
   });
 

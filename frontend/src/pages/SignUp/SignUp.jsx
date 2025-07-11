@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import useSign from "../../hooks/useSignup";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const { loading, signup } = useSign();
@@ -67,7 +68,6 @@ const SignUp = () => {
               className="bg-[#2a1d1d] text-white px-4 py-3 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-[#f5f5f5] text-sm">User Name</label>
             <input
@@ -80,7 +80,6 @@ const SignUp = () => {
               className="bg-[#2a1d1d] text-white px-4 py-3 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-[#f5f5f5] text-sm">Email</label>
             <input
@@ -93,7 +92,6 @@ const SignUp = () => {
               className="bg-[#2a1d1d] text-white px-4 py-3 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-[#f5f5f5] text-sm">Password</label>
             <input
@@ -118,10 +116,16 @@ const SignUp = () => {
               className="bg-[#2a1d1d] text-white file:bg-[#C1A57B] file:text-[#1e1e1e] file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer px-4 py-2 rounded-xl border border-[#4d3b3b] focus:outline-none focus:ring-2 focus:ring-[#C1A57B]"
             />
           </div>
-
+          <Link
+            className="  text-sm text-[#C1A57B] hover:text-[#e2c89e] underline
+          hover:underline-offset-2 transition-all duration-200"
+            to="/signin"
+          >
+            Already have an account?
+          </Link>
           <button
             type="submit"
-            className="mt-4 bg-[#C1A57B] text-[#1e1e1e] font-semibold py-3 rounded-xl hover:bg-[#e2c89e] transition-all duration-300 hover:cursor-grab"
+            className="mt-2 bg-[#C1A57B] text-[#1e1e1e] font-semibold py-3 rounded-xl hover:bg-[#e2c89e] transition-all duration-300 hover:cursor-grab"
             disabled={loading}
           >
             {loading ? <span>Signing Up....</span> : <span>Sign up</span>}
