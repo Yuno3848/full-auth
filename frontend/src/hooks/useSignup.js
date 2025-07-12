@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../contexts/authContext";
+import { Navigate, useNavigate } from "react-router-dom";
 const useSign = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const navigate = useNavigate();
   const signup = async ({ username, fullname, email, password, avatar }) => {
     setLoading(true);
     const errorResult = handleError(username, fullname, email, password);
@@ -36,8 +38,9 @@ const useSign = () => {
         toast.error(data.message || "Something went wrong");
         return;
       }
-      setAuthUser(data.data);
+
       toast.success("Signup successful!");
+      navigate("/signin", { replace: true });
     } catch (error) {
       console.log("sign up error", error.message);
       toast.error("Network error. Please try again.");

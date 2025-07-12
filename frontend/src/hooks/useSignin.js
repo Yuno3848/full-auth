@@ -24,6 +24,7 @@ const useSignIn = () => {
           password,
         }),
       });
+
       const data = await result.json();
       if (!data.success) {
         toast.error(data.message || "Something went wrong");

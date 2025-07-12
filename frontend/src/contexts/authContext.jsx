@@ -10,12 +10,14 @@ export const ContextProvider = ({ children }) => {
       try {
         const res = await fetch("http://localhost:8080/api/v1/user/profile", {
           method: "GET",
-          credentials: "include",
+          credentials: true,
         });
-        if (!res.ok) throw new Error("Not authenticated");
-        const data = await res.json();
-        setAuthUser(data.data);
-        console.log(data.data);
+        if (res.ok) {
+          const data = await res.json();
+          setAuthUser(data.data);
+        } else {
+          setAuthUser(null);
+        }
       } catch (error) {
         setAuthUser(null);
       }

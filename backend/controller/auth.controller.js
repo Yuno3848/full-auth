@@ -250,8 +250,8 @@ export const resetPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "password reset successfully...", user));
 });
 export const getCurrentUser = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-
+  console.log("get current user :", req.user.id);
+  const userId = req.user.id;
   if (!userId) {
     throw new ApiError(400, "User not found");
   }
